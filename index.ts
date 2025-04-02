@@ -1,9 +1,12 @@
 import express from 'express'
 import 'dotenv/config'
+import bodyParser from 'body-parser'
 import AdminRoute from './routes/AdminRoute'
 import VendorRoute from './routes/VendorRoute'
 
 const app = express()
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: true}))
 
 const PORT = process.env.PORT || 3000
 
