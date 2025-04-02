@@ -6,6 +6,9 @@ const app = express()
 
 const PORT = process.env.PORT || 3000
 
+app.use('/', (req, res) => {
+    res.send('Whaaaaats UPPPP')
+})
 app.listen(3000, () => {
     console.log("Listening on Port 3000")
 })
