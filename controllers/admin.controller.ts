@@ -7,11 +7,11 @@ export const createVendor = async (req: Request, res: Response, next: NextFuncti
   const { name, address, pincode, foodType, email, password, ownerName, phone } = <CreateVendorInput>req.body;
   
   try {
-    let vendor = await Vendor.findOne({
+    let existingVendor = await Vendor.findOne({
       email: email,
     });
 
-    if (vendor) {
+    if (existingVendor) {
       res.status(400).json({ message: "User already exists" });
       return;
     }
@@ -35,7 +35,7 @@ export const createVendor = async (req: Request, res: Response, next: NextFuncti
       message: "Vendor created successfully!",
       data: { name, address, pincode, foodType, email, ownerName, phone },
     });
-    
+
   } catch (error) {
     console.error(error);
     res.status(500).send({ message: "Something went wrong" });
