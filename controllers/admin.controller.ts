@@ -13,13 +13,15 @@ export const createVendor = async(req: Request, res: Response, next: NextFunctio
         foodType: foodType,
         email: email,
         password: password,
-        salt:  '',
+        salt:  'hekllooooo',
         ownerName: ownerName,
         phone: phone,
         rating: 0,
         serviceAvailable: false,
         coverImage:[],
     })
+
+    res.json(createdVendor)
 }
 
 export const getVendors = async(req: Request, res: Response, next: NextFunction) => {
