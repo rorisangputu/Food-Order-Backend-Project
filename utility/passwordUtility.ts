@@ -6,5 +6,5 @@ export const generateSalt = async (): Promise<string> => {
 }
 
 export const GeneratePassword = async (password: string, salt: string) => {
-    await bcrypt.hash(password, salt);
+   return await bcrypt.hash(password, salt);
 }

@@ -19,7 +19,7 @@ export const createVendor = async (req: Request, res: Response, next: NextFuncti
     }
 
     //Generate Salt
-    let salt: string = await generateSalt()
+    const salt = await generateSalt()
     //Encrypt Password using the salt
     const hashedPassword = GeneratePassword(password, salt)
 
