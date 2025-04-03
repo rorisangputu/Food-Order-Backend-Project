@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import bcryptjs from 'bcrypt'
 import { CreateVendorInput } from "../dto";
 import Vendor from "../models/vendor.model";
 
@@ -15,7 +16,7 @@ export const createVendor = async (req: Request, res: Response, next: NextFuncti
       res.status(400).json({ message: "User already exists" });
       return;
     }
-
+    const hashedPassword = await bcryptjs.hash(password, 10)
     const createdVendor = await Vendor.create({
       name: name,
       address: address,
