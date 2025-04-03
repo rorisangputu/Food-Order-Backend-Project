@@ -16,6 +16,10 @@ export const createVendor = async (req: Request, res: Response, next: NextFuncti
       res.status(400).json({ message: "User already exists" });
       return;
     }
+
+    //Generate Salt
+
+    //Hash Password
     const hashedPassword = await bcryptjs.hash(password, 10)
     const createdVendor = await Vendor.create({
       name: name,
@@ -23,7 +27,7 @@ export const createVendor = async (req: Request, res: Response, next: NextFuncti
       pincode: pincode,
       foodType: foodType,
       email: email,
-      password: password,
+      password: hashedPassword,
       salt: "hekllooooo",
       ownerName: ownerName,
       phone: phone,
@@ -34,7 +38,7 @@ export const createVendor = async (req: Request, res: Response, next: NextFuncti
 
     res.status(201).json({
       message: "Vendor created successfully!",
-      data: { name, address, pincode, foodType, email, ownerName, phone },
+      data: createdVendor,
     });
 
   } catch (error) {
