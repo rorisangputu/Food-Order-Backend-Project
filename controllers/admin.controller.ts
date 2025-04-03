@@ -21,7 +21,7 @@ export const createVendor = async (req: Request, res: Response, next: NextFuncti
     //Generate Salt
     const salt = await generateSalt()
     //Encrypt Password using the salt
-    const hashedPassword = GeneratePassword(password, salt)
+    const hashedPassword = await GeneratePassword(password, salt)
 
 
     const createdVendor = await Vendor.create({
@@ -41,7 +41,9 @@ export const createVendor = async (req: Request, res: Response, next: NextFuncti
 
     res.status(201).json({
       message: "Vendor created successfully!",
-      data: createdVendor,
+      vendorData: {
+        createdVendor
+      },
     });
 
   } catch (error) {
