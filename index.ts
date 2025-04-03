@@ -1,6 +1,7 @@
 import express from 'express'
 import 'dotenv/config'
 import bodyParser from 'body-parser'
+import mongoose from 'mongoose'
 import AdminRoute from './routes/AdminRoute'
 import VendorRoute from './routes/VendorRoute'
 
