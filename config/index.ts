@@ -1,1 +1,1 @@
-export const MONGO_CONN = process.env.MONGO_URL
+export const MONGO_CONN: string = process.env.MONGO_URL || 'string';
