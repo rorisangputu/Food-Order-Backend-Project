@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import bcryptjs from 'bcrypt'
 import { CreateVendorInput } from "../dto";
 import Vendor from "../models/vendor.model";
+import { GeneratePassword, generateSalt } from "../utility/passwordUtility";
 
 export const createVendor = async (req: Request, res: Response, next: NextFunction
 ) => {
@@ -18,9 +19,11 @@ export const createVendor = async (req: Request, res: Response, next: NextFuncti
     }
 
     //Generate Salt
+    let salt: string = await generateSalt()
+    //Encrypt Password using the salt
+    const hashedPassword = GeneratePassword(password, salt)
 
-    //Hash Password
-    const hashedPassword = await bcryptjs.hash(password, 10)
+
     const createdVendor = await Vendor.create({
       name: name,
       address: address,
@@ -28,7 +31,7 @@ export const createVendor = async (req: Request, res: Response, next: NextFuncti
       foodType: foodType,
       email: email,
       password: hashedPassword,
-      salt: "hekllooooo",
+      salt: salt,
       ownerName: ownerName,
       phone: phone,
       rating: 0,
