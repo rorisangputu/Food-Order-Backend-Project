@@ -56,7 +56,24 @@ export const getVendors = async (
   req: Request,
   res: Response,
   next: NextFunction
-) => {};
+) => {
+
+  try {
+
+    const vendors = Vendor.find() 
+    if(!vendors) {
+      res.status(400).json({message:"Something went wrong"});
+      return;
+    }
+    res.json(vendors)
+
+  } catch (error) {
+
+    console.log(error);
+    res.status(500).json({message: "Something went wrong!"})
+
+  }
+};
 
 export const getVendorById = async (
   req: Request,
