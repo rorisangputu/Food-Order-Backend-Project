@@ -31,3 +31,15 @@ export const vendorLogin = async (req: Request, res: Response, next: NextFunctio
     }
 
 }
+
+export const getVendorProfile = async(req: Request, res: Response, next:NextFunction)=> {
+
+}
+
+export const updateVendorProfile = async(req:Request, res: Response, next:NextFunction)=> {
+
+}
+
+export const updateVendorServices = async (req: Request, res:Response, next: NextFunction) => {
+    
+}
