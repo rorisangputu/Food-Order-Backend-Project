@@ -62,7 +62,7 @@ export const getVendors = async (
 
     const vendors = await Vendor.find() 
     if(!vendors) {
-      res.status(400).json({message:"Something went wrong"});
+      res.status(400).json({message:"There are no vendors currently"});
       return;
     }
     res.json(vendors)
@@ -79,4 +79,25 @@ export const getVendorById = async (
   req: Request,
   res: Response,
   next: NextFunction
-) => {};
+) => {
+  //Getting vendor id from req parameter (url)
+  const vendorId = req.params.id
+
+  try {
+    //finding vendor in db by Id and assigning it to a const variable
+    const vendor = await Vendor.findById(vendorId)
+
+    //If vendor with that id doesnt exist return an error with message
+    if(!vendor){
+      res.status(400).json({message: "A vendor with this Id does not exist"})
+      return;
+    }
+
+    //respond with vendor info as json
+    res.json(vendor)
+
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({message: "Something went wrong"})
+  }
+};
