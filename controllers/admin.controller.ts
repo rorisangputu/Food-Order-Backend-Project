@@ -3,18 +3,9 @@ import bcryptjs from 'bcrypt'
 import { CreateVendorInput } from "../dto";
 import Vendor from "../models/vendor.model";
 import { GeneratePassword, generateSalt } from "../utility/passwordUtility";
+import { findVendor } from "../utility/findUtility";
 
-export const findVendor = async(id: string | undefined, email? : string) => {
-  
-  if(email){
-    const vendor = await Vendor.findOne({email: email});
-    return vendor;
-  }else{
-    let vendorId = await Vendor.findById(id)
-    return vendorId;
-  }
 
-}
 
 export const createVendor = async (req: Request, res: Response, next: NextFunction) => {
   const { name, address, pincode, foodType, email, password, ownerName, phone } = <CreateVendorInput>req.body;
