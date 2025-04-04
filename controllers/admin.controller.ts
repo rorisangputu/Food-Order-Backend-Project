@@ -14,7 +14,6 @@ export const findVendor = async(id: string | undefined, email? : string) => {
     return vendorId;
   }
 
-  
 }
 
 export const createVendor = async (req: Request, res: Response, next: NextFunction) => {
@@ -92,7 +91,7 @@ export const getVendorById = async (
 ) => {
   //Getting vendor id from req parameter (url)
   const vendorId = req.params.id
-  console.log(vendorId)
+  
   try {
     //finding vendor in db by Id and assigning it to a const variable
     const vendor = await findVendor(vendorId);
