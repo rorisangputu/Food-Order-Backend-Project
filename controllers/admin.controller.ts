@@ -60,7 +60,7 @@ export const getVendors = async (
 
   try {
 
-    const vendors = Vendor.find() 
+    const vendors = await Vendor.find() 
     if(!vendors) {
       res.status(400).json({message:"Something went wrong"});
       return;
