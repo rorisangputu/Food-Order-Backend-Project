@@ -4,14 +4,24 @@ import { CreateVendorInput } from "../dto";
 import Vendor from "../models/vendor.model";
 import { GeneratePassword, generateSalt } from "../utility/passwordUtility";
 
-export const createVendor = async (req: Request, res: Response, next: NextFunction
-) => {
+export const findVendor = async(id: string | undefined, email? : string) => {
+  
+  if(email){
+    const vendor = await Vendor.findOne({email: email});
+    return vendor;
+  }else{
+    let vendorId = await Vendor.findById(id)
+    return vendorId;
+  }
+
+  
+}
+
+export const createVendor = async (req: Request, res: Response, next: NextFunction) => {
   const { name, address, pincode, foodType, email, password, ownerName, phone } = <CreateVendorInput>req.body;
   
   try {
-    let existingVendor = await Vendor.findOne({
-      email: email,
-    });
+    let existingVendor = await findVendor('', email);
 
     if (existingVendor) {
       res.status(400).json({ message: "User already exists" });
@@ -82,10 +92,10 @@ export const getVendorById = async (
 ) => {
   //Getting vendor id from req parameter (url)
   const vendorId = req.params.id
-
+  console.log(vendorId)
   try {
     //finding vendor in db by Id and assigning it to a const variable
-    const vendor = await Vendor.findById(vendorId)
+    const vendor = await findVendor(vendorId);
 
     //If vendor with that id doesnt exist return an error with message
     if(!vendor){
