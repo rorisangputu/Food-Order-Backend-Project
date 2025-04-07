@@ -2,6 +2,8 @@ import { Request, Response, NextFunction } from "express";
 import { EditVendorInputs, VendorLoginInputs } from "../dto";
 import { GenerateSignature, passwordCompare } from "../utility/passwordUtility";
 import { findVendor } from "../utility/findUtility";
+import { CreateFoodInputs } from "../dto/food.dto";
+import Food from "../models/food.model";
 
 export const vendorLogin = async (req: Request, res: Response, next: NextFunction) => {
     
@@ -107,5 +109,42 @@ export const updateVendorServices = async (req: Request, res:Response, next: Nex
 export const addFood = async (req: Request, res: Response, next: NextFunction) => {
     
     const user = req.user;
+
+    if(!user){
+        res.status(400).json({message: "User not found"})
+        return;
+    }
     
+
+    try {
+        
+        const vendor = await findVendor(user._id)
+        const { name, description, category, foodType, readyTime, price } = <CreateFoodInputs>req.body;
+
+        if(!vendor){
+            res.status(400).json({message: "Vendor not found"})
+            return;
+        }
+
+        const createdFood = await Food.create({
+            vendorId: vendor._id,
+            name: name,
+            description: description,
+            category: category,
+            foodType: foodType,
+            image: ['https://luigispizzakenosha.com/wp-content/uploads/placeholder.png'],
+            readyTime: readyTime,
+            price: price,
+            rating: 0
+        })
+
+        vendor.foods.push(createdFood);
+        const result = await vendor.save();
+
+        res.json(result);
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({message: "Something went wrong"})
+    }
 }
