@@ -77,8 +77,9 @@ export const updateVendorProfile = async(req:Request, res: Response, next:NextFu
     vendor.address = address;
     vendor.phone = phone;
     vendor.foodType = foodTypes;
-    
-    res.json(vendor);
+
+    const result = await vendor.save();    
+    res.json(result);
 }
 
 export const updateVendorServices = async (req: Request, res:Response, next: NextFunction) => {
@@ -98,7 +99,7 @@ export const updateVendorServices = async (req: Request, res:Response, next: Nex
     }
 
     vendor.serviceAvailable = !vendor.serviceAvailable as boolean;
-
-    res.json(vendor);
+    const result = await vendor.save(); 
+    res.json(result);
 
 }
