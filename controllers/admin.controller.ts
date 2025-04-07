@@ -37,6 +37,7 @@ export const createVendor = async (req: Request, res: Response, next: NextFuncti
       rating: 0,
       serviceAvailable: false,
       coverImage: [],
+      foods: []
     });
 
     res.status(201).json({
