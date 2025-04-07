@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { VendorLoginInputs } from "../dto";
+import { EditVendorInputs, VendorLoginInputs } from "../dto";
 import { GenerateSignature, passwordCompare } from "../utility/passwordUtility";
 import { findVendor } from "../utility/findUtility";
 
@@ -56,6 +56,33 @@ export const getVendorProfile = async(req: Request, res: Response, next:NextFunc
 }
 
 export const updateVendorProfile = async(req:Request, res: Response, next:NextFunction)=> {
+    
+    const { foodTypes, name, address, phone } = <EditVendorInputs>req.body;
+
+    const user = req.user;
+    
+    if(!user){
+        res.status(400).json({message: "User not found"})
+        return;
+    }
+
+    const vendor = await findVendor(user._id)
+
+    if(!vendor){
+        res.status(400).json({message: "User not found"})
+        return;
+    }
+
+    vendor.name = name;
+    vendor.address = address;
+    vendor.phone = phone;
+    vendor.foodType = foodTypes;
+    
+    res.json(vendor);
+}
+
+export const updateVendorServices = async (req: Request, res:Response, next: NextFunction) => {
+    
     const user = req.user;
 
     if(!user){
@@ -64,9 +91,14 @@ export const updateVendorProfile = async(req:Request, res: Response, next:NextFu
     }
 
     const vendor = await findVendor(user._id)
-    res.json(vendor);
-}
 
-export const updateVendorServices = async (req: Request, res:Response, next: NextFunction) => {
-    
+    if(!vendor){
+        res.status(400).json({message: "User not found"})
+        return;
+    }
+
+    vendor.serviceAvailable = !vendor.serviceAvailable as boolean;
+
+    res.json(vendor);
+
 }
