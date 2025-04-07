@@ -103,3 +103,9 @@ export const updateVendorServices = async (req: Request, res:Response, next: Nex
     res.json(result);
 
 }
+
+export const addFood = async (req: Request, res: Response, next: NextFunction) => {
+    
+    const user = req.user;
+    
+}
