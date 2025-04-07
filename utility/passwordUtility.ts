@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt'
 import { VendorPayload } from '../dto';
+import jwt from 'jsonwebtoken';
 
 export const generateSalt = async (): Promise<string> => {
     let salt = await bcrypt.genSalt()
@@ -18,4 +19,5 @@ export const passwordCompare = async(password: string, vendorPass: string) => {
 
 export const GenerateSignature = async (payload: VendorPayload) => {
 
+    const signature = jwt.sign(payload, process.env.JWT_SECRET as string, {expiresIn: "1d"} )
 }
