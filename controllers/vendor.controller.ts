@@ -40,11 +40,19 @@ export const vendorLogin = async (req: Request, res: Response, next: NextFunctio
         console.log(error)
         res.status(500).json({messsage: "Something wen wrong"})
     }
-
 }
 
 export const getVendorProfile = async(req: Request, res: Response, next:NextFunction)=> {
 
+    const user = req.user;
+
+    if(!user){
+        res.status(400).json({message: "User not found"})
+        return;
+    }
+
+    const vendor = await findVendor(user._id)
+    return res.json(vendor);
 }
 
 export const updateVendorProfile = async(req:Request, res: Response, next:NextFunction)=> {
