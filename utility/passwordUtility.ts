@@ -19,5 +19,6 @@ export const passwordCompare = async(password: string, vendorPass: string) => {
 
 export const GenerateSignature = async (payload: VendorPayload) => {
 
-    const signature = jwt.sign(payload, process.env.JWT_SECRET as string, {expiresIn: "1d"} )
+    const signature = await jwt.sign(payload, process.env.JWT_SECRET as string, {expiresIn: "1d"} )
+    return signature;
 }
