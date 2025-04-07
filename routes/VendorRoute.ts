@@ -8,7 +8,8 @@ router.get('/', (req: Request, res: Response, next: NextFunction) => {
 })
 
 router.post('/login', vendorLogin)
-router.get('/profile', Authenticate, getVendorProfile )
+router.use(Authenticate)
+router.get('/profile', getVendorProfile )
 router.patch('/profile', updateVendorProfile)
 router.patch('/service', updateVendorServices)
 

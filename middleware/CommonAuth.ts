@@ -21,7 +21,7 @@ export const Authenticate = async (req: Request, res: Response, next: NextFuncti
     const validate = await ValidateSignature(req);
     
     if(!validate){
-        res.status(400).json({message: "User not Authorizes"})
+        res.status(400).json({message: "User not Authorized"})
     }
 
     next()
