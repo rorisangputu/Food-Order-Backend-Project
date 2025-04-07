@@ -20,18 +20,21 @@ const FoodSchema = new Schema ({
     },
     description:{
         type: String,
+        required: true,
     },
     category:{
         type: String,
     },
     foodType:{
         type: String,
+        required: true,
     },
     readyTime:{
         type: String,
     },
     price:{
         type: Number,
+        required: true,
     }, 
     rating:{
         type: Number,
@@ -44,4 +47,17 @@ const FoodSchema = new Schema ({
         required: true
     }
     
-}, {timestamps: true})
+}, {
+    toJSON: {
+        transform(doc, ret){
+            delete ret.__v,
+            delete ret.createdAt,
+            delete ret.updatedAt
+        }
+    },
+    timestamps: true
+})
+
+const Food = mongoose.model<FoodDoc>("Food", FoodSchema)
+
+export default Food;

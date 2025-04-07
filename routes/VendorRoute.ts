@@ -13,4 +13,7 @@ router.get('/profile', getVendorProfile )
 router.patch('/profile', updateVendorProfile)
 router.patch('/service', updateVendorServices)
 
+router.post('/food',)
+router.get('/foods',)
+
 export default router;
