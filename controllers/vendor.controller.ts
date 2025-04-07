@@ -34,7 +34,7 @@ export const vendorLogin = async (req: Request, res: Response, next: NextFunctio
             name: vendor.name
         })
         
-        res.status(200).json({message: "Successfully logged In", signature});
+        res.status(200).json({message: "Successfully logged In", signature, data: vendor});
 
     }catch(error){
         console.log(error)
