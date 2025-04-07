@@ -33,7 +33,7 @@ export const vendorLogin = async (req: Request, res: Response, next: NextFunctio
             foodTypes: vendor.foodType,
             name: vendor.name
         })
-
+        
         res.status(200).json({message: "Successfully logged In", signature});
 
     }catch(error){
@@ -52,7 +52,7 @@ export const getVendorProfile = async(req: Request, res: Response, next:NextFunc
     }
 
     const vendor = await findVendor(user._id)
-    return res.json(vendor);
+    res.json(vendor);
 }
 
 export const updateVendorProfile = async(req:Request, res: Response, next:NextFunction)=> {
