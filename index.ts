@@ -4,7 +4,7 @@ import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import AdminRoute from './routes/AdminRoute'
 import VendorRoute from './routes/VendorRoute'
-
+import path from 'path'
 
 const dbConn = async  () => { 
     try {
@@ -19,6 +19,7 @@ const dbConn = async  () => {
 const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
+app.use('/images', express.static(path.join(__dirname, 'images')))
 
 const PORT = process.env.PORT || 3000
 
