@@ -126,13 +126,17 @@ export const addFood = async (req: Request, res: Response, next: NextFunction) =
             return;
         }
 
+        const files = req.files as [Express.Multer.File]
+
+        const images = files.map((file: Express.Multer.File) => file.filename);
+
         const createdFood = await Food.create({
             vendorId: vendor._id,
             name: name,
             description: description,
             category: category,
             foodType: foodType,
-            image: ['https://luigispizzakenosha.com/wp-content/uploads/placeholder.png'],
+            image: images,
             readyTime: readyTime,
             price: price,
             rating: 0
