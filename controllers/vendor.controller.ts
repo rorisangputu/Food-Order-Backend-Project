@@ -126,17 +126,14 @@ export const addFood = async (req: Request, res: Response, next: NextFunction) =
             return;
         }
 
-        const files = req.files as [Express.Multer.File]
-
-        const images = files.map((file: Express.Multer.File) => file.filename);
-
+        
         const createdFood = await Food.create({
             vendorId: vendor._id,
             name: name,
             description: description,
             category: category,
             foodType: foodType,
-            image: images,
+            image: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwZgTsV5FSzcygnwaRW4SePUSXSiNZCdYUhw&s"],
             readyTime: readyTime,
             price: price,
             rating: 0

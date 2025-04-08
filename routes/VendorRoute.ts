@@ -22,7 +22,7 @@ router.get('/profile', getVendorProfile )
 router.patch('/profile', updateVendorProfile)
 router.patch('/service', updateVendorServices)
 
-router.post('/food', images, addFood)
+router.post('/food', addFood)
 router.get('/foods', getFoods)
 
 export default router;
