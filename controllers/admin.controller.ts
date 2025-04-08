@@ -36,7 +36,7 @@ export const createVendor = async (req: Request, res: Response, next: NextFuncti
       phone: phone,
       rating: 0,
       serviceAvailable: false,
-      coverImage: [],
+      coverImage: ["https://cwdaust.com.au/wpress/wp-content/uploads/2015/04/placeholder-restaurant.png"],
       foods: []
     });
 
