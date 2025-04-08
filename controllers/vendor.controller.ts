@@ -141,10 +141,39 @@ export const addFood = async (req: Request, res: Response, next: NextFunction) =
         vendor.foods.push(createdFood);
         const result = await vendor.save();
 
-        res.json(result);
+        res.status(201).json(result);
         
     } catch (error) {
         console.log(error)
         res.status(500).json({message: "Something went wrong"})
     }
+}
+
+export const getFoods = async (req: Request, res: Response, next: NextFunction)=> {
+
+    const user = req.user;
+
+    if(!user){
+        res.status(400).json({message: "User not found"})
+        return;
+    }
+
+    const vendor = await findVendor(user._id);
+
+    if(!vendor){
+        res.status(400).json({message: "User not found"})
+        return;
+    }
+
+    if (!vendor.foods || vendor.foods.length === 0) {
+        res.status(204).json({ message: "No foods found" });
+        return;
+      }
+    
+      // Fetch all food documents by their IDs
+      const foodList = await Promise.all(
+        vendor.foods.map((foodId: string)=> Food.findById(foodId))
+      );
+
+    res.status(200).json(foodList)
 }

@@ -1,5 +1,5 @@
 import {Router, Request, Response, NextFunction} from 'express'
-import { addFood, getVendorProfile, updateVendorProfile, updateVendorServices, vendorLogin } from '../controllers/vendor.controller'
+import { addFood, getFoods, getVendorProfile, updateVendorProfile, updateVendorServices, vendorLogin } from '../controllers/vendor.controller'
 import { Authenticate } from '../middleware'
 const router = Router()
 
@@ -14,6 +14,6 @@ router.patch('/profile', updateVendorProfile)
 router.patch('/service', updateVendorServices)
 
 router.post('/food', addFood)
-//router.get('/foods',)
+router.get('/foods', getFoods)
 
 export default router;
