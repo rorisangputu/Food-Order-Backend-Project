@@ -1,4 +1,4 @@
-import {Router, Request, Response, NextFunction} from 'express'
+import {Router} from 'express'
 import { addFood, getFoods, getVendorProfile, updateVendorProfile, updateVendorServices, vendorLogin } from '../controllers/vendor.controller'
 import { Authenticate } from '../middleware'
 import multer from 'multer'
