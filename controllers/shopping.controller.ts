@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { findVendor } from "../utility/findUtility";
 import Vendor from "../models/vendor.model";
 import { FoodDoc } from "../models/food.model";
 
