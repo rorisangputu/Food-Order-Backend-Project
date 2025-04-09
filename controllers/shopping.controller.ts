@@ -56,10 +56,30 @@ export const GetFoodIn30Min = async (req: Request, res: Response) => {
 }
 
 export const GetRestaurantByID = async (req: Request, res: Response) => {
+    // console.log(req.params.id)
+    // return;
+    const id = req.params.id;
+
+    const restaurant = await Vendor.findById(id)
+
+    if (!restaurant) {
+        res.status(400).json({ message: "Restaurant Not Found" })
+        return;
+    }
+
+    res.status(200).json(restaurant);
 
 }
 
 export const SearchFoods = async (req: Request, res: Response) => {
+    const result = await Vendor.find({ serviceAvailable: true }).populate("foods");
 
+    if (result.length > 0) {
+        let foodResult: any = [];
+        result.map(item => foodResult.push(...item.foods))
+
+        res.status(200).json(result)
+    }
+    res.status(400).json({ message: "Data Not Found" });
 }
 
