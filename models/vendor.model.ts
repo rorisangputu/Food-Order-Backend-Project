@@ -62,7 +62,7 @@ const VendorSchema = new Schema ({
     },
     foods: [{
         type: mongoose.SchemaTypes.ObjectId,
-        ref: 'food'
+        ref: 'Food'
     }]
 
 }, {
