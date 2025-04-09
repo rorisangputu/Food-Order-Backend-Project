@@ -1,4 +1,4 @@
-import express, {Application}from 'express'
+import { Application }from 'express'
 import AdminRoute from '../routes/AdminRoute'
 import VendorRoute from '../routes/VendorRoute'
 import bodyParser from 'body-parser'
