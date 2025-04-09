@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import { VendorPayload } from '../dto';
 import jwt from 'jsonwebtoken';
 import { Request } from 'express';
