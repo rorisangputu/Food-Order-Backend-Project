@@ -6,12 +6,11 @@ const router = Router();
 // ----------- Top Restaurants ---------------
 router.get('/top-restaurants', GetTopRestaurants)
 
+// ----------- Food Available in 30 Mins ---------------
+router.get('/foods-in-thirty', GetFoodIn30Min)
+
 // ----------- Food Availability ---------------
 router.get('/:pincode', GetFoodAvailability)
-
-
-// ----------- Food Available in 30 Mins ---------------
-router.get('/foods-in-thirty/:pincode', GetFoodIn30Min)
 
 // ----------- Search Foods ---------------
 router.get('/search/:pincode', SearchFoods)
