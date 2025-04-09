@@ -3,11 +3,12 @@ import { GetFoodAvailability, GetFoodIn30Min, GetRestaurantByID, GetTopRestauran
 
 const router = Router();
 
+// ----------- Top Restaurants ---------------
+router.get('/top-restaurants', GetTopRestaurants)
+
 // ----------- Food Availability ---------------
 router.get('/:pincode', GetFoodAvailability)
 
-// ----------- Top Restaurants ---------------
-router.get('/top-restaurants/:pincode', GetTopRestaurants)
 
 // ----------- Food Available in 30 Mins ---------------
 router.get('/foods-in-thirty/:pincode', GetFoodIn30Min)
