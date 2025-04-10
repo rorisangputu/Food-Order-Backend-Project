@@ -12,9 +12,7 @@ export const userSignUp = async (req: Request, res: Response) => {
     const userPassword = await GeneratePassword(password, salt);
     
     const { otp, expiry } = GenerateOTP();
-    console.log(otp, expiry)
-    res.status(200).json('working...')
-    return;
+    
 
     const createUser = await User.create({
         email: email,
@@ -30,6 +28,14 @@ export const userSignUp = async (req: Request, res: Response) => {
         lat: 0,
         lng: 0,
     })
+
+    if(createUser){
+        //send the otp to customer
+
+        //generate signature
+
+        //semd the result to client
+    }
     
 }
 
