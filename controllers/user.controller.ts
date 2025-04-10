@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { CreateUserInputs } from "../dto/user.dto";
-import { GeneratePassword, generateSalt } from "../utility/passwordUtility";
+import { GeneratePassword, generateSalt, GenerateSignature } from "../utility/passwordUtility";
 import User from "../models/user.model";
-import { GenerateOTP } from "../utility/notificationUtility";
+import { GenerateOTP, onRequestOTP } from "../utility/notificationUtility";
 
 export const userSignUp = async (req: Request, res: Response) => {
 
@@ -31,8 +31,10 @@ export const userSignUp = async (req: Request, res: Response) => {
 
     if(createUser){
         //send the otp to customer
-
+        await onRequestOTP(otp, phone)
+        
         //generate signature
+        const signature = GenerateSignature()
 
         //semd the result to client
     }
