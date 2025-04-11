@@ -34,10 +34,22 @@ export const userSignUp = async (req: Request, res: Response) => {
         await onRequestOTP(otp, phone)
         
         //generate signature
-        const signature = GenerateSignature()
+        const signature = GenerateSignature({
+            _id: createUser._id as string,
+            email: createUser.email,
+            verified: createUser.verified
+        })
 
         //semd the result to client
+
+        res.status(201).json({
+            signature: signature,
+            verified: createUser.verified,
+            email: createUser.email
+        });
     }
+
+    res.status(400).json({message: "Error with signature"})
     
 }
 
