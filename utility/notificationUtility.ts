@@ -19,10 +19,9 @@ export const onRequestOTP = async (otp: number, toPhoneNumber: string) => {
     const authToken = process.env.TWILIO_AUTH_TOKEN;
     const client = require('twilio')(accountSid, authToken);
 
-    const response = await client.message.create({
+    const response = await client.messages.create({
         from: 'whatsapp:+14155238886',
-        contentSid: 'HX229f5a04fd0510ce1b071852155d3e75',
-        contentVariables: `{"1":${otp}}`,
+        body: `Your OTP is ${otp}`, // for WhatsApp use `body`, not `contentSid`
         to: `whatsapp:+27${toPhoneNumber}`
     })
 
