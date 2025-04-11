@@ -34,7 +34,7 @@ export const userSignUp = async (req: Request, res: Response) => {
         await onRequestOTP(otp, phone)
         
         //generate signature
-        const signature = GenerateSignature({
+        const signature = await GenerateSignature({
             _id: createUser._id as string,
             email: createUser.email,
             verified: createUser.verified
