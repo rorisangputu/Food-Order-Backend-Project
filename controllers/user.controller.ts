@@ -51,7 +51,8 @@ export const userSignUp = async (req: Request, res: Response) => {
         res.status(201).json({
             signature: signature,
             verified: createUser.verified,
-            email: createUser.email
+            email: createUser.email,
+            otp: createUser.otp
         });
         return;
     }
@@ -76,7 +77,7 @@ export const verifyAcc = async (req: Request, res: Response) => {
             res.status(400).json({message: "Couldn't find user"})
         }
         
-        if (profile?.otp === parseInt(otp) && profile?.otp_expiry <= new Date()) {
+        if (profile?.otp === parseInt(otp) && profile?.otp_expiry >= new Date()) {
             
             profile.verified = true;
 
@@ -87,12 +88,13 @@ export const verifyAcc = async (req: Request, res: Response) => {
                 email: updatedCustomerResponse.email,
                 verified: updatedCustomerResponse.verified
             })
+
+            res.status(200).json({ message: "User verified", signature: signature, verified: updatedCustomerResponse.verified, email: updatedCustomerResponse.email })
+            return;
         }
         
-
-
     }
-    
+    res.status(400).json({message: "Error with otp validation"})
     
 }
 
