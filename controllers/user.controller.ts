@@ -66,6 +66,34 @@ export const userLogin = async (req: Request, res: Response) => {
 
 export const verifyAcc = async (req: Request, res: Response) => {
     
+    const { otp } = req.body;
+    const customer = req.user;
+
+    if(customer) {
+        const profile = await User.findById(customer._id);
+
+        if (!profile) {
+            res.status(400).json({message: "Couldn't find user"})
+        }
+        
+        if (profile?.otp === parseInt(otp) && profile?.otp_expiry <= new Date()) {
+            
+            profile.verified = true;
+
+            const updatedCustomerResponse = await profile.save();
+
+            const signature = await GenerateSignature({
+                _id: updatedCustomerResponse._id as string,
+                email: updatedCustomerResponse.email,
+                verified: updatedCustomerResponse.verified
+            })
+        }
+        
+
+
+    }
+    
+    
 }
 
 export const requestOtp = async (req: Request, res: Response) => {
