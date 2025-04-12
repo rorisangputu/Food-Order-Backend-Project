@@ -13,3 +13,8 @@ export interface UserPayload {
     verified: boolean;
     
 }
+
+export interface UserLoginInput{
+    email: string;
+    password: string;
+}
