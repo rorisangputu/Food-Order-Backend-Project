@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-import bcryptjs from 'bcrypt'
 import { CreateVendorInput } from "../dto";
 import Vendor from "../models/vendor.model";
 import { GeneratePassword, generateSalt } from "../utility/passwordUtility";
