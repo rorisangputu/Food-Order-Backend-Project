@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { CreateUserInputs } from "../dto/user.dto";
+import { CreateUserInputs, UserLoginInput } from "../dto/user.dto";
 import { GeneratePassword, generateSalt, GenerateSignature } from "../utility/passwordUtility";
 import User from "../models/user.model";
 import { GenerateOTP, onRequestOTP } from "../utility/notificationUtility";
@@ -63,6 +63,8 @@ export const userSignUp = async (req: Request, res: Response) => {
 
 export const userLogin = async (req: Request, res: Response) => {
     
+    const { email, password }:UserLoginInput = req.body;
+
 }
 
 export const verifyAcc = async (req: Request, res: Response) => {
