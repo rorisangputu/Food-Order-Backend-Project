@@ -1,5 +1,6 @@
 import {Router} from 'express'
 import { editProfile, requestOtp, userLogin, userProfile, userSignUp, verifyAcc } from '../controllers/user.controller';
+import { Authenticate } from '../middleware';
 
 const router = Router();
 
@@ -10,6 +11,8 @@ router.post('/signup', userSignUp)
 router.post('/login', userLogin)
 
 //Authentication
+
+router.use(Authenticate);
 
 // ---------- Verify Customer ------------
 router.patch('/verify', verifyAcc)
