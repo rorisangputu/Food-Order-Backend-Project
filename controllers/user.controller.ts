@@ -13,6 +13,12 @@ export const userSignUp = async (req: Request, res: Response) => {
     
     const { otp, expiry } = GenerateOTP();
     
+    const existUser = await User.findOne({ email: email })
+    
+    if (existUser) {
+        res.status(400).json({ message: "User already exists" })
+        return;
+    }
 
     const createUser = await User.create({
         email: email,
@@ -31,7 +37,7 @@ export const userSignUp = async (req: Request, res: Response) => {
 
     if(createUser){
         //send the otp to customer
-        await onRequestOTP(otp, phone)
+        //await onRequestOTP(otp, phone)
         
         //generate signature
         const signature = await GenerateSignature({
@@ -47,6 +53,7 @@ export const userSignUp = async (req: Request, res: Response) => {
             verified: createUser.verified,
             email: createUser.email
         });
+        return;
     }
 
     res.status(400).json({message: "Error with signature"})
