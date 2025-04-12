@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import { editProfile, getOtp, userLogin, userProfile, userSignUp, verifyAcc } from '../controllers/user.controller';
+import { editProfile, requestOtp, userLogin, userProfile, userSignUp, verifyAcc } from '../controllers/user.controller';
 
 const router = Router();
 
@@ -15,7 +15,7 @@ router.post('/login', userLogin)
 router.patch('/verify', verifyAcc)
 
 // ---------- OTP / Requesting OTP ------------
-router.get('/otp', getOtp)
+router.get('/otp', requestOtp)
 
 // ---------- Profile------------
 router.get('/profile', userProfile)

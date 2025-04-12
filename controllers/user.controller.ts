@@ -68,7 +68,7 @@ export const verifyAcc = async (req: Request, res: Response) => {
     
 }
 
-export const getOtp = async (req: Request, res: Response) => {
+export const requestOtp = async (req: Request, res: Response) => {
     
 }
 
