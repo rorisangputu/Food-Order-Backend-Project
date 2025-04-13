@@ -129,6 +129,29 @@ export const verifyAcc = async (req: Request, res: Response) => {
 }
 
 export const requestOtp = async (req: Request, res: Response) => {
+    const customer = req.user;
+
+    if (customer) {
+        const profile = await User.findById(customer?._id);
+
+        if (profile) {
+            const { otp, expiry } = GenerateOTP();
+            profile.otp = otp
+            profile.otp_expiry = expiry
+
+            await profile.save()
+            //await onRequestOTP(otp, profile.phone);
+            res.status(200).json({ message: "OTP has been sent to your whatsapp", profile, otp: profile.otp })
+            return;
+        } else {
+            res.status(400).json({ message: "User does not exist" })
+            return;
+        }
+
+    }
+
+    res.status(400).json({ message: "User does not exist" })
+    return;
     
 }
 
