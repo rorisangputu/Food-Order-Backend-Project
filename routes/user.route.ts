@@ -18,7 +18,7 @@ router.post('/login', userLogin)
 router.patch('/verify',Authenticate, verifyAcc)
 
 // ---------- OTP / Requesting OTP ------------
-router.get('/otp', requestOtp)
+router.get('/otp',Authenticate, requestOtp)
 
 // ---------- Profile------------
 router.get('/profile', userProfile)
