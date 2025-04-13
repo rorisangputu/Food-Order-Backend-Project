@@ -80,7 +80,7 @@ export const userLogin = async (req: Request, res: Response) => {
             return;
         }
 
-        const signature = GenerateSignature({
+        const signature = await GenerateSignature({
             _id: user._id as string,
             email: user.email,
             verified: user.verified
