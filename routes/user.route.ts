@@ -12,10 +12,10 @@ router.post('/login', userLogin)
 
 //Authentication
 
-router.use(Authenticate);
+
 
 // ---------- Verify Customer ------------
-router.patch('/verify', verifyAcc)
+router.patch('/verify',Authenticate, verifyAcc)
 
 // ---------- OTP / Requesting OTP ------------
 router.get('/otp', requestOtp)
