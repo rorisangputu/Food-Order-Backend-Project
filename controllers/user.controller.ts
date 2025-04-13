@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { CreateUserInputs, UserLoginInput } from "../dto/user.dto";
+import { CreateUserInputs, EditUserProfileInputs, UserLoginInput } from "../dto/user.dto";
 import { GeneratePassword, generateSalt, GenerateSignature, passwordCompare } from "../utility/passwordUtility";
 import User from "../models/user.model";
 import { GenerateOTP, onRequestOTP } from "../utility/notificationUtility";
@@ -156,9 +156,36 @@ export const requestOtp = async (req: Request, res: Response) => {
 }
 
 export const userProfile = async (req: Request, res: Response) => {
+    const user = req.user;
     
+
+    if (user) {
+        const profile = User.findById(user._id);
+        if (profile) {
+            res.status(201).json({user: profile})
+        } else {
+            res.status(400).json({ message: "User not found" })
+        }
+    }
+    res.status(400).json({message: "User not found"})
 }
 
 export const editProfile = async (req: Request, res: Response) => {
-    
+    const user = req.user;
+    const {firstName, lastName} = <EditUserProfileInputs>req.body
+
+    if (user) {
+        const profile = await User.findById(user._id);
+        
+        if (profile) {
+            profile.firstName = firstName;
+            profile.lastName = lastName;
+
+            await profile.save();
+            
+        } else {
+            res.status(400).json({ message: "User not found" })
+        }
+    }
+    res.status(400).json({message: "User not found"})
 }
