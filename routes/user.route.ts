@@ -21,9 +21,9 @@ router.patch('/verify',Authenticate, verifyAcc)
 router.get('/otp',Authenticate, requestOtp)
 
 // ---------- Profile------------
-router.get('/profile', userProfile)
+router.get('/profile', Authenticate, userProfile)
 
-router.patch('/profile', editProfile)
+router.patch('/edit-profile', Authenticate, editProfile)
 
 
 export default router;
