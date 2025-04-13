@@ -181,10 +181,12 @@ export const editProfile = async (req: Request, res: Response) => {
             profile.firstName = firstName;
             profile.lastName = lastName;
 
-            await profile.save();
-            
+            const result = await profile.save();
+            res.status(200).json({message: "User has been edited", result})
+            return;
         } else {
             res.status(400).json({ message: "User not found" })
+            return;
         }
     }
     res.status(400).json({message: "User not found"})
