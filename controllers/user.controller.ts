@@ -160,7 +160,7 @@ export const userProfile = async (req: Request, res: Response) => {
     
 
     if (user) {
-        const profile = User.findById(user._id);
+        const profile = await User.findById(user._id);
         if (profile) {
             res.status(201).json({user: profile})
         } else {
