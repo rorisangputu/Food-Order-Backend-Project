@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 import { CreateUserInputs, UserLoginInput } from "../dto/user.dto";
-import { GeneratePassword, generateSalt, GenerateSignature } from "../utility/passwordUtility";
+import { GeneratePassword, generateSalt, GenerateSignature, passwordCompare } from "../utility/passwordUtility";
 import User from "../models/user.model";
 import { GenerateOTP, onRequestOTP } from "../utility/notificationUtility";
+import { sign } from "jsonwebtoken";
 
 export const userSignUp = async (req: Request, res: Response) => {
 
@@ -63,7 +64,34 @@ export const userSignUp = async (req: Request, res: Response) => {
 
 export const userLogin = async (req: Request, res: Response) => {
     
-    const { email, password }:UserLoginInput = req.body;
+    try {
+        const { email, password }: UserLoginInput = req.body;
+        const user = await User.findOne({ email: email });
+
+        if (!user) {
+            res.status(400).json({ message: "Email or Password are incorrect" });
+            return;
+        }
+
+        const validatePass = await passwordCompare(password, user.password)
+
+        if (!validatePass) {
+            res.status(400).json({ message: "Email or Password are incorrect" })
+            return;
+        }
+
+        const signature = GenerateSignature({
+            _id: user._id as string,
+            email: user.email,
+            verified: user.verified
+        })
+
+    res.status(200).json({message: "User logged in", signature: signature, user})
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({message: "Something went wrong with Sign In"})
+    }
+        
 
 }
 
