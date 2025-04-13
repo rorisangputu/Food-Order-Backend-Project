@@ -18,3 +18,8 @@ export interface UserLoginInput{
     email: string;
     password: string;
 }
+
+export interface EditUserProfileInputs {
+    firstName: string;
+    lastName: string;
+}
