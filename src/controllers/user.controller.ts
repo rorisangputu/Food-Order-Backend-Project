@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
-import { CreateUserInputs, EditUserProfileInputs, UserLoginInput } from "../dto/user.dto";
+import { CreateUserInputs, EditUserProfileInputs, OrderInputs, UserLoginInput } from "../dto/user.dto";
 import { GeneratePassword, generateSalt, GenerateSignature, passwordCompare } from "../utility/passwordUtility";
 import User from "../models/user.model";
 import { GenerateOTP, onRequestOTP } from "../utility/notificationUtility";
 import { sign } from "jsonwebtoken";
+import Food from "../models/food.model";
 
 export const userSignUp = async (req: Request, res: Response) => {
 
@@ -205,13 +206,28 @@ export const CreateOrder = async (req: Request, res: Response) => {
 
         const profile = await User.findById(customer._id);
 
-        const cart = req.body;
-
         //get order items from req
+        const cart = <[OrderInputs]>req.body;
+        let cartItems = Array();
+        let netAmount = 0.0;
 
         //calculate order amount
+        const foods = await Food.find().where('_id').in(cart.map(item=> item._id)).exec();
+
+        foods.map(food => {
+            cart.map(({_id, unit}) => {
+
+                if(food._id == _id){
+                    netAmount += (food.price * unit);
+                    cartItems.push({food, unit})
+                }
+            })
+        })
 
         //create order w item desc
+        if(cartItems){
+            //Create Order
+        }
     }
 
     
