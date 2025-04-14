@@ -35,7 +35,6 @@ const OrderSchema = new Schema ({
     },
     paymentResponse: {
         type: String,
-        required: true,
     },
     orderStatus: {
         type: String,
