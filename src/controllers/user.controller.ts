@@ -230,11 +230,25 @@ export const CreateOrder = async (req: Request, res: Response) => {
         if(cartItems){
             //Create Order
             const currentOrder = await Order.create({
-
+                orderID: orderId,
+                items: cartItems,
+                totalAmount: netAmount,
+                orderDate: new Date(),
+                paymentMethod: 'COD',
+                paymentResponse: '',
+                orderStatus: 'Pending'
             })
+
+            if(currentOrder){
+                profile?.orders.push(currentOrder);
+                const profileResponse = await profile?.save()
+                res.status(200).json(profileResponse);
+                return;
+            }
         }
     }
 
+    res.status(400).json({ message: "Error with Create Order!" })
     
 }
 
