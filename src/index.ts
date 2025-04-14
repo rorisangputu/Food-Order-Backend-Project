@@ -11,7 +11,7 @@ const StartServer = async() => {
     await dbConn()
 
     app.listen(PORT, () => {
-        console.log("Listening on Port 3000")
+        console.log(`Listening on Port ${PORT}`)
     })
 }
 
