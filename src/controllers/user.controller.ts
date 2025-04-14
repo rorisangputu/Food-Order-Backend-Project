@@ -241,8 +241,8 @@ export const CreateOrder = async (req: Request, res: Response) => {
 
             if(currentOrder){
                 profile?.orders.push(currentOrder);
-                const profileResponse = await profile?.save()
-                res.status(200).json(profileResponse);
+                await profile?.save()
+                res.status(200).json(currentOrder);
                 return;
             }
         }
