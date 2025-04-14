@@ -191,3 +191,15 @@ export const editProfile = async (req: Request, res: Response) => {
     }
     res.status(400).json({message: "User not found"})
 }
+
+// ORDERS
+
+export const CreateOrder = async (req: Request, res: Response) => {
+    
+}
+export const GetOrders = async (req: Request, res: Response) => {
+
+}
+export const GetOrderById = async (req: Request, res: Response) => {
+
+}
