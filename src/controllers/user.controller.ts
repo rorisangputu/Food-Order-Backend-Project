@@ -5,6 +5,7 @@ import User from "../models/user.model";
 import { GenerateOTP, onRequestOTP } from "../utility/notificationUtility";
 
 import Food from "../models/food.model";
+import Order from "../models/order.model";
 
 export const userSignUp = async (req: Request, res: Response) => {
 
@@ -228,6 +229,9 @@ export const CreateOrder = async (req: Request, res: Response) => {
         //create order w item desc
         if(cartItems){
             //Create Order
+            const currentOrder = await Order.create({
+
+            })
         }
     }
 
