@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import { editProfile, requestOtp, userLogin, userProfile, userSignUp, verifyAcc } from '../controllers/user.controller';
+import { CreateOrder, editProfile, GetOrderById, GetOrders, requestOtp, userLogin, userProfile, userSignUp, verifyAcc } from '../controllers/user.controller';
 import { Authenticate } from '../middleware';
 
 const router = Router();
@@ -23,9 +23,9 @@ router.get('/profile', Authenticate, userProfile)
 router.patch('/edit-profile', Authenticate, editProfile)
 
 //Orders
-router.post('/create-order',)
-router.get('/orders', )
-router.get('/order/:id', )
+router.post('/create-order', Authenticate, CreateOrder)
+router.get('/orders', Authenticate, GetOrders )
+router.get('/order/:id', Authenticate, GetOrderById )
 
 
 export default router;
