@@ -10,10 +10,7 @@ router.post('/signup', userSignUp)
 // ---------- Login ------------
 router.post('/login', userLogin)
 
-//Authentication
-
-
-
+//Authentication Layer
 // ---------- Verify Customer ------------
 router.patch('/verify',Authenticate, verifyAcc)
 
@@ -24,6 +21,11 @@ router.get('/otp',Authenticate, requestOtp)
 router.get('/profile', Authenticate, userProfile)
 
 router.patch('/edit-profile', Authenticate, editProfile)
+
+//Orders
+router.post('/create-order',)
+router.get('/orders', )
+router.get('/order/:id', )
 
 
 export default router;
