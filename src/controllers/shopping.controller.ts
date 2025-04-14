@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import Vendor from "../src/models/vendor.model";
-import { FoodDoc } from "../src/models/food.model";
+import Vendor from "../models/vendor.model";
+import { FoodDoc } from "../models/food.model";
 
 export const GetFoodAvailability = async (req: Request, res: Response) => {
 
