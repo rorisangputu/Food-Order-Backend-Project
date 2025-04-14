@@ -196,10 +196,31 @@ export const editProfile = async (req: Request, res: Response) => {
 
 export const CreateOrder = async (req: Request, res: Response) => {
     
+    //get current user
+    const customer = req.user;
+    
+    if(customer){
+        //create order id
+        const orderId = `${Math.floor(Math.random() * 89999) + 1000}`;
+
+        const profile = await User.findById(customer._id);
+
+        const cart = req.body;
+
+        //get order items from req
+
+        //calculate order amount
+
+        //create order w item desc
+    }
+
+    
 }
+
 export const GetOrders = async (req: Request, res: Response) => {
 
 }
+
 export const GetOrderById = async (req: Request, res: Response) => {
 
 }
