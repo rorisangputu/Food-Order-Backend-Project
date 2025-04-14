@@ -23,3 +23,8 @@ export interface EditUserProfileInputs {
     firstName: string;
     lastName: string;
 }
+
+export class OrderInputs {
+    _id: string;
+    unit: number;
+}
