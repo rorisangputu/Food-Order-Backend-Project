@@ -3,7 +3,7 @@ import { CreateUserInputs, EditUserProfileInputs, OrderInputs, UserLoginInput } 
 import { GeneratePassword, generateSalt, GenerateSignature, passwordCompare } from "../utility/passwordUtility";
 import User from "../models/user.model";
 import { GenerateOTP, onRequestOTP } from "../utility/notificationUtility";
-import { sign } from "jsonwebtoken";
+
 import Food from "../models/food.model";
 
 export const userSignUp = async (req: Request, res: Response) => {
@@ -35,6 +35,7 @@ export const userSignUp = async (req: Request, res: Response) => {
         verified: false,
         lat: 0,
         lng: 0,
+        orders: []
     })
 
     if(createUser){
