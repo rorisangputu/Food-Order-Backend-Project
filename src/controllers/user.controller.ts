@@ -195,6 +195,20 @@ export const editProfile = async (req: Request, res: Response) => {
     res.status(400).json({message: "User not found"})
 }
 
+//CART FUNCTIONS
+
+export const AddToCart = async (req: Request, res: Response) => {
+
+}
+
+export const GetCartDetails = async (req: Request, res: Response) => {
+
+}
+
+export const DeleteCart = async (req: Request, res: Response) => {
+
+}
+
 // ORDERS
 
 export const CreateOrder = async (req: Request, res: Response) => {
@@ -303,14 +317,3 @@ export const GetOrderById = async (req: Request, res: Response) => {
 
 }
 
-export const AddToCart = async (req: Request, res: Response) => {
-
-}
-
-export const GetCartDetails = async (req: Request, res: Response) => {
-
-}
-
-export const DeleteCartItem = async (req: Request, res: Response) => {
-    
-}
