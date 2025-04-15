@@ -201,7 +201,7 @@ export const AddToCart = async (req: Request, res: Response) => {
     const user = req.user;
 
     if(user){
-        const profile = await User.findById(user?._id)
+        const profile = await User.findById(user._id).populate('cart.food')
         let cartItems: { food: any; unit: number }[] = [];
         const { _id, unit }: OrderInputs = req.body;
 
@@ -222,7 +222,7 @@ export const AddToCart = async (req: Request, res: Response) => {
                 }
             }            
         }
-        
+
     } else{
         res.status(500).json({message: "Something when wrong"})
         return;
