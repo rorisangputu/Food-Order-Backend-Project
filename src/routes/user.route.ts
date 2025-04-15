@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import { CreateOrder, editProfile, GetOrderById, GetOrders, requestOtp, userLogin, userProfile, userSignUp, verifyAcc } from '../controllers/user.controller';
+import { AddToCart, CreateOrder, DeleteCartItem, editProfile, GetCartDetails, GetOrderById, GetOrders, requestOtp, userLogin, userProfile, userSignUp, verifyAcc } from '../controllers/user.controller';
 import { Authenticate } from '../middleware';
 
 const router = Router();
@@ -29,9 +29,9 @@ router.get('/order/:id', Authenticate, GetOrderById )
 
 //Cart
 
-router.post('/cart',)
-router.get('/cart',) 
-router.delete('/cart',)
+router.post('/cart', Authenticate, AddToCart)
+router.get('/cart', Authenticate, GetCartDetails) 
+router.delete('/cart', Authenticate, DeleteCartItem)
 
 
 export default router;
