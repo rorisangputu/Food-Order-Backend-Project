@@ -14,7 +14,9 @@ export interface UserDoc extends Document {
     profileImg: string;
     lat: number;
     lng: number;
-    orders: [OrderDoc]
+    cart: [any];
+    orders: [OrderDoc];
+
 }
 const UserSchema = new Schema<UserDoc>({
     firstName: { type: String },
