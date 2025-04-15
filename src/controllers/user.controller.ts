@@ -202,6 +202,12 @@ export const AddToCart = async (req: Request, res: Response) => {
 
     try {
         const profile = await User.findById(user?._id)
+
+        if(!profile){
+            res.status(400).json({message: "Profile doesnt exist"})
+            return;
+        }
+
     } catch (error) {
         res.status(500).json({message: "Something when wrong"})
         return;
