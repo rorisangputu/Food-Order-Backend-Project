@@ -31,6 +31,12 @@ const UserSchema = new Schema<UserDoc>({
     profileImg: { type: String },
     lat: { type: Number },
     lng: { type: Number },
+    cart: [
+        {
+            food: { type: Schema.Types, ref: 'Food', require: true},
+            unit: { type: Number, require: true }
+        }
+    ],
     orders: [
         {
             type: Schema.Types.ObjectId,
