@@ -198,7 +198,15 @@ export const editProfile = async (req: Request, res: Response) => {
 //CART FUNCTIONS
 
 export const AddToCart = async (req: Request, res: Response) => {
+    const user = req.user;
 
+    try {
+        
+    } catch (error) {
+        res.status(500).json({message: "Something when wrong"})
+        return;
+    }
+    res.status(500).json({message: "User not Authorized"})
 }
 
 export const GetCartDetails = async (req: Request, res: Response) => {
