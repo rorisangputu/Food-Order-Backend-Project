@@ -302,3 +302,15 @@ export const GetOrderById = async (req: Request, res: Response) => {
     }
 
 }
+
+export const AddToCart = async (req: Request, res: Response) => {
+
+}
+
+export const GetCartDetails = async (req: Request, res: Response) => {
+
+}
+
+export const DeleteCartItem = async (req: Request, res: Response) => {
+    
+}
