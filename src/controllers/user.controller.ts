@@ -201,7 +201,7 @@ export const AddToCart = async (req: Request, res: Response) => {
     const user = req.user;
 
     try {
-        
+        const profile = await User.findById(user?._id)
     } catch (error) {
         res.status(500).json({message: "Something when wrong"})
         return;
