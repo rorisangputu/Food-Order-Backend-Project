@@ -213,15 +213,16 @@ export const AddToCart = async (req: Request, res: Response) => {
                 //Check for cart items
                 cartItems = profile.cart;
                 
-            }
-
-            
+                if (cartItems.length > 0) {
+                    //check and update unit
+                    let existingFoodItem = cartItems.filter(item => item.food._id.toString() === _id)
+                } else {
+                    //add new item to cart
+                    cartItems.push({ food, unit });
+                }
+            }            
         }
-
         
-        
-        
-
     } else{
         res.status(500).json({message: "Something when wrong"})
         return;
