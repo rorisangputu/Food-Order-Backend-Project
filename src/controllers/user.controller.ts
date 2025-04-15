@@ -280,5 +280,25 @@ export const GetOrders = async (req: Request, res: Response) => {
 }
 
 export const GetOrderById = async (req: Request, res: Response) => {
+    
+    const id  = req.params.id
+
+    try {
+    
+        const order = await Order.findById(id)
+    
+        if(!order){
+            res.status(400).json("Cannot find order")
+            return;
+        }
+
+        res.status(200).json(order)
+        return;
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({message: "Something went wrong"})
+        return;
+    }
 
 }
