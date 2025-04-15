@@ -209,23 +209,24 @@ export const CreateOrder = async (req: Request, res: Response) => {
         const profile = await User.findById(customer._id);
 
         //get order items from req
-        const cart = <[OrderInputs]>req.body;
-        let cartItems = Array();
+        //console.log(req.body)
+        
+        const cart: OrderInputs[] = req.body;
+        let cartItems: { food: any; unit: number }[] = [];
         let netAmount = 0.0;
 
         //calculate order amount
-        const foods = await Food.find().where('_id').in(cart.map(item=> item._id)).exec();
+        const foods = await Food.find().where('_id').in(cart.map((item) => item._id)).exec();
 
-        foods.map(food => {
-            cart.map(({_id, unit}) => {
-
-                if(food._id == _id){
-                    netAmount += (food.price * unit);
-                    cartItems.push({food, unit})
-                }
-            })
-        })
-
+        foods.forEach(food => {
+            cart.forEach(({ _id, unit }) => {
+              if (food._id?.toString() === _id) {
+                netAmount += food.price * unit;
+                cartItems.push({ food, unit });
+              }
+            });
+        });
+      
         //create order w item desc
         if(cartItems){
             //Create Order
