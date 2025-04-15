@@ -255,6 +255,12 @@ export const CreateOrder = async (req: Request, res: Response) => {
 
 export const GetOrders = async (req: Request, res: Response) => {
 
+    const user = req.user;
+
+    if(!user){
+        res.status(400).json({message: "User not Authorised"});
+        return;
+    }
 }
 
 export const GetOrderById = async (req: Request, res: Response) => {
