@@ -27,5 +27,11 @@ router.post('/create-order', Authenticate, CreateOrder)
 router.get('/orders', Authenticate, GetOrders )
 router.get('/order/:id', Authenticate, GetOrderById )
 
+//Cart
+
+router.post('/cart',)
+router.get('/cart',) 
+router.delete('/cart',)
+
 
 export default router;
