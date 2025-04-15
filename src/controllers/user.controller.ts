@@ -257,9 +257,25 @@ export const GetOrders = async (req: Request, res: Response) => {
 
     const user = req.user;
 
-    if(!user){
-        res.status(400).json({message: "User not Authorised"});
+    try {
+        if(!user){
+            res.status(400).json({message: "User not Authorised"});
+            return;
+        }
+    
+        const customer = await User.findById(user._id).populate('orders')
+    
+        if(!customer){
+            res.status(400).json("Cannot find user")
+        }
+    
+        const orders = customer?.orders
+        res.status(200).json(orders)
         return;
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({message: "Something went wrong"})
     }
 }
 
