@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import { AddToCart, CreateOrder, DeleteCartItem, editProfile, GetCartDetails, GetOrderById, GetOrders, requestOtp, userLogin, userProfile, userSignUp, verifyAcc } from '../controllers/user.controller';
+import { AddToCart, CreateOrder, DeleteCart, editProfile, GetCartDetails, GetOrderById, GetOrders, requestOtp, userLogin, userProfile, userSignUp, verifyAcc } from '../controllers/user.controller';
 import { Authenticate } from '../middleware';
 
 const router = Router();
@@ -22,16 +22,18 @@ router.get('/profile', Authenticate, userProfile)
 
 router.patch('/edit-profile', Authenticate, editProfile)
 
+//Cart
+
+router.post('/cart', Authenticate, AddToCart)
+router.get('/cart', Authenticate, GetCartDetails) 
+router.delete('/cart', Authenticate, DeleteCart)
+
 //Orders
 router.post('/create-order', Authenticate, CreateOrder)
 router.get('/orders', Authenticate, GetOrders )
 router.get('/order/:id', Authenticate, GetOrderById )
 
-//Cart
 
-router.post('/cart', Authenticate, AddToCart)
-router.get('/cart', Authenticate, GetCartDetails) 
-router.delete('/cart', Authenticate, DeleteCartItem)
 
 
 export default router;
