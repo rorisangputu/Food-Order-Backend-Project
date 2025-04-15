@@ -200,15 +200,29 @@ export const editProfile = async (req: Request, res: Response) => {
 export const AddToCart = async (req: Request, res: Response) => {
     const user = req.user;
 
-    try {
+    if(user){
         const profile = await User.findById(user?._id)
+        let cartItems: { food: any; unit: number }[] = [];
+        const { _id, unit }: OrderInputs = req.body;
 
-        if(!profile){
-            res.status(400).json({message: "Profile doesnt exist"})
-            return;
+        const food = await Food.findById(_id); 
+
+        if(food){
+            
+            if(profile){
+                //Check for cart items
+                cartItems = profile.cart;
+                
+            }
+
+            
         }
 
-    } catch (error) {
+        
+        
+        
+
+    } else{
         res.status(500).json({message: "Something when wrong"})
         return;
     }
