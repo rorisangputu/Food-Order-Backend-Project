@@ -24,7 +24,7 @@ export interface EditUserProfileInputs {
     lastName: string;
 }
 
-export class OrderInputs {
+export interface OrderInputs {
     _id: string;
     unit: number;
 }
