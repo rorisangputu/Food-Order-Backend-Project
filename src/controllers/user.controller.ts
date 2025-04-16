@@ -216,6 +216,17 @@ export const AddToCart = async (req: Request, res: Response) => {
                 if (cartItems.length > 0) {
                     //check and update unit
                     let existingFoodItem = cartItems.filter(item => item.food._id.toString() === _id)
+                
+                    if(existingFoodItem.length > 0){
+                        const index = cartItems.indexOf(existingFoodItem[0]);
+                        if(unit > 0){
+                            cartItems[index] = { food, unit };
+                        }else{
+                            cartItems.splice(index, 1)
+                        }
+                    }else{
+                        cartItems.push({ food, unit });
+                    }
                 } else {
                     //add new item to cart
                     cartItems.push({ food, unit });
@@ -227,7 +238,7 @@ export const AddToCart = async (req: Request, res: Response) => {
         res.status(500).json({message: "Something when wrong"})
         return;
     }
-    res.status(500).json({message: "User not Authorized"})
+    res.status(401).json({message: "User not Authorized"})
 }
 
 export const GetCartDetails = async (req: Request, res: Response) => {
