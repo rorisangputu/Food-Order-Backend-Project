@@ -33,10 +33,10 @@ const UserSchema = new Schema<UserDoc>({
     lng: { type: Number },
     cart: [
         {
-            food: { type: Schema.Types, ref: 'Food', require: true},
-            unit: { type: Number, require: true }
+            food: { type: Schema.Types.ObjectId, ref: 'Food', required: true },
+            unit: { type: Number, required: true }
         }
-    ],
+    ],    
     orders: [
         {
             type: Schema.Types.ObjectId,
@@ -46,10 +46,10 @@ const UserSchema = new Schema<UserDoc>({
   }, {
     toJSON: {
         transform(doc, ret){
-            delete ret.password,
-            delete ret.salt,
-            delete ret.__v,
-            delete ret.createdAt,
+            delete ret.password;
+            delete ret.salt;
+            delete ret.__v;
+            delete ret.createdAt;
             delete ret.updatedAt
         }
     },

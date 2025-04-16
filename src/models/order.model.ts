@@ -18,7 +18,7 @@ const OrderSchema = new Schema ({
         unique: true,
     },
     items: [{
-        food: {type: Schema.Types.ObjectId, ref: "food", require: true},
+        food: { type: Schema.Types.ObjectId, ref: "Food", required: true },
         unit: {type: Number, required: true}
     }],
     totalAmount: {

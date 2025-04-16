@@ -30,7 +30,7 @@ const FoodSchema = new Schema ({
         required: true,
     },
     readyTime:{
-        type: String,
+        type: Number,
     },
     price:{
         type: Number,
