@@ -231,6 +231,13 @@ export const AddToCart = async (req: Request, res: Response) => {
                     //add new item to cart
                     cartItems.push({ food, unit });
                 }
+
+                if(cartItems){
+                    profile.cart = cartItems as any;
+                    const cartResult = await profile.save()
+                    res.status(200).json(cartResult.cart);
+                    return;
+                }
             }            
         }
 
