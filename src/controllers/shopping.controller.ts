@@ -68,7 +68,7 @@ export const GetRestaurantByID = async (req: Request, res: Response) => {
     }
 
     res.status(200).json(restaurant);
-
+    
 }
 
 export const SearchFoods = async (req: Request, res: Response) => {
