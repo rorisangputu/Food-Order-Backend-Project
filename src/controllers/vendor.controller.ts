@@ -178,3 +178,16 @@ export const getFoods = async (req: Request, res: Response, next: NextFunction)=
 
     res.status(200).json(foodList)
 }
+
+//ORDERS 
+export const Orders = async (req: Request, res: Response) => {
+    
+}
+
+export const ProcessOrder = async (req: Request, res: Response) => {
+    
+}
+
+export const GetOrderById = async (req: Request, res: Response) => {
+    
+}
