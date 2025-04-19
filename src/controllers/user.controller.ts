@@ -250,6 +250,14 @@ export const AddToCart = async (req: Request, res: Response) => {
 
 export const GetCartDetails = async (req: Request, res: Response) => {
 
+    const customer = req.user;
+
+    if (customer) {
+        const profile = await User.findById(customer._id)
+    }
+
+    res.status(400).json({ message: "Cart is empty! " })
+    return;
 }
 
 export const DeleteCart = async (req: Request, res: Response) => {
