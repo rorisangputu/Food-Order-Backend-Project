@@ -215,5 +215,34 @@ export const GetOrderById = async (req: Request, res: Response) => {
 
 export const ProcessOrder = async (req: Request, res: Response) => {
     
+    const orderId = req.params.id;
+    
+    const { status, remarks, time } = req.body
+
+    if (orderId) {
+        const order = await Order.findById(orderId).populate('food');
+        
+        if (order) {
+            order.orderStatus = status
+            order.remarks = remarks
+            
+            if (time) {
+                order.readyTime = time
+            }
+            
+            const orderResult = await order.save();
+            if (orderResult !== null) {
+                res.status(200).json(orderResult);
+                return; 
+            } else {
+                res.status(400).json({message: 'Couldnt process order'})
+                return;
+            }
+            
+            
+        }
+        
+    }
+res.status(400).json({message: 'Couldnt process order'})
 }
 
