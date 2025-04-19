@@ -11,7 +11,6 @@ export interface OrderDoc extends Document{
     orderStatus: string,
     remarks: string;
     deliveryId: string;
-    deliveryStatus: string
     appliedOffers: boolean;
     offerId: string;
     readyTime: number;
@@ -57,9 +56,6 @@ const OrderSchema = new Schema ({
         type: String,
     },
     deliveryId:  {
-        type: String,
-    },
-    deliveryStatus:  {
         type: String,
     },
     appliedOffers:  {
