@@ -1,7 +1,8 @@
 import mongoose, {Schema, Document, Model } from 'mongoose';
 
 export interface OrderDoc extends Document{
-    orderID: string;
+    orderId: string;
+    vendorId: string
     items: [any],
     totalAmount: number,
     orderDate: Date;
