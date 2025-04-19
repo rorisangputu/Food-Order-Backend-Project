@@ -186,9 +186,17 @@ export const GetCurrentOrders = async (req: Request, res: Response) => {
     const user = req.user; //Vendor
 
     if (user) {
-        const orders = await Order.find({vendorId: user._id}).populate('items.id')
+        const orders = await Order.find({ vendorId: user._id }).populate('items.id');
+
+        if (orders != null) {
+            res.status(200).json(orders)
+            return;
+        }
+        
+        res.status(400).json({ message: "Order info not found" })
+        return;
     }
-    res.status(400).json({ message: "Order info not found" })
+    res.status(400).json({ message: "Can't get orders" })
     return;
 }
 

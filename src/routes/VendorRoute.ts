@@ -27,7 +27,7 @@ router.get('/foods', getFoods)
 
 //Orders
 router.get('/orders', GetCurrentOrders)
-router.put('/order/:id/process', ProcessOrder)
 router.get('/order/:id', GetOrderById)
+router.put('/order/:id/process', ProcessOrder)
 
 export default router;
