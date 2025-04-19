@@ -4,6 +4,7 @@ import { GenerateSignature, passwordCompare } from "../utility/passwordUtility";
 import { findVendor } from "../utility/findUtility";
 import { CreateFoodInputs } from "../dto/food.dto";
 import Food from "../models/food.model";
+import Order from "../models/order.model";
 
 export const vendorLogin = async (req: Request, res: Response, next: NextFunction) => {
     
@@ -181,10 +182,11 @@ export const getFoods = async (req: Request, res: Response, next: NextFunction)=
 
 //ORDERS 
 export const GetCurrentOrders = async (req: Request, res: Response) => {
-    const user = req.user;
+    
+    const user = req.user; //Vendor
 
     if (user) {
-        
+        const orders = await Order.find({vendorId: user._id}).populate('items.id')
     }
     res.status(400).json({ message: "Order info not found" })
     return;
