@@ -25,4 +25,9 @@ router.patch('/service', updateVendorServices)
 router.post('/food', addFood)
 router.get('/foods', getFoods)
 
+//Orders
+router.get('/orders',)
+router.put('/order/:id/process',)
+router.get('/order/:id',)
+
 export default router;
