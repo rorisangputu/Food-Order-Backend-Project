@@ -328,6 +328,7 @@ export const GetOrders = async (req: Request, res: Response) => {
     
         if(!customer){
             res.status(400).json("Cannot find user")
+            return;
         }
     
         const orders = customer?.orders
