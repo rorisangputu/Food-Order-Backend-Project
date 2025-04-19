@@ -257,7 +257,8 @@ export const GetCartDetails = async (req: Request, res: Response) => {
     if (customer) {
         const profile = await User.findById(customer._id).populate('cart.food');
         if (profile) {
-            return res.status(200).json(profile.cart);
+            res.status(200).json(profile.cart);
+            return;
         }
     }
 
@@ -271,11 +272,12 @@ export const DeleteCart = async (req: Request, res: Response) => {
     if (customer) {
         const profile = await User.findById(customer._id).populate('cart.food');
         if (profile != null) {
-            
+
             profile.cart = [] as any;
             const cartResult = profile.save();
 
-            return res.status(200).json(profile.cart);
+            res.status(200).json(profile.cart);
+            return;
         }
     }
 
