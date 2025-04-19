@@ -200,6 +200,7 @@ export const editProfile = async (req: Request, res: Response) => {
 export const AddToCart = async (req: Request, res: Response) => {
     const user = req.user;
 
+
     if(user){
         const profile = await User.findById(user._id).populate('cart.food')
         let cartItems: { food: any; unit: number }[] = [];
@@ -245,6 +246,7 @@ export const AddToCart = async (req: Request, res: Response) => {
         res.status(500).json({message: "Something when wrong"})
         return;
     }
+
     res.status(401).json({message: "User not Authorized"})
 }
 
@@ -253,7 +255,10 @@ export const GetCartDetails = async (req: Request, res: Response) => {
     const customer = req.user;
 
     if (customer) {
-        const profile = await User.findById(customer._id)
+        const profile = await User.findById(customer._id).populate('cart.food');
+        if (profile) {
+            return res.status(200).json(profile.cart);
+        }
     }
 
     res.status(400).json({ message: "Cart is empty! " })
@@ -261,7 +266,21 @@ export const GetCartDetails = async (req: Request, res: Response) => {
 }
 
 export const DeleteCart = async (req: Request, res: Response) => {
+    const customer = req.user;
 
+    if (customer) {
+        const profile = await User.findById(customer._id).populate('cart.food');
+        if (profile != null) {
+            
+            profile.cart = [] as any;
+            const cartResult = profile.save();
+
+            return res.status(200).json(profile.cart);
+        }
+    }
+
+    res.status(400).json({ message: "Cart is already empty! " })
+    return;
 }
 
 // ORDERS
