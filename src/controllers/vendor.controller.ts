@@ -181,7 +181,13 @@ export const getFoods = async (req: Request, res: Response, next: NextFunction)=
 
 //ORDERS 
 export const GetCurrentOrders = async (req: Request, res: Response) => {
-    
+    const user = req.user;
+
+    if (user) {
+        
+    }
+    res.status(400).json({ message: "Order info not found" })
+    return;
 }
 
 export const ProcessOrder = async (req: Request, res: Response) => {
