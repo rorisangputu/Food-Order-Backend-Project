@@ -180,7 +180,7 @@ export const getFoods = async (req: Request, res: Response, next: NextFunction)=
 }
 
 //ORDERS 
-export const Orders = async (req: Request, res: Response) => {
+export const GetCurrentOrders = async (req: Request, res: Response) => {
     
 }
 
