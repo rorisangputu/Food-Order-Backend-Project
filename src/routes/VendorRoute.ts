@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import { addFood, getFoods, getVendorProfile, updateVendorProfile, updateVendorServices, vendorLogin } from '../controllers/vendor.controller'
+import { addFood, GetCurrentOrders, getFoods, GetOrderById, getVendorProfile, ProcessOrder, updateVendorProfile, updateVendorServices, vendorLogin } from '../controllers/vendor.controller'
 import { Authenticate } from '../middleware'
 import multer from 'multer'
 const router = Router()
@@ -26,8 +26,8 @@ router.post('/food', addFood)
 router.get('/foods', getFoods)
 
 //Orders
-router.get('/orders',)
-router.put('/order/:id/process',)
-router.get('/order/:id',)
+router.get('/orders', GetCurrentOrders)
+router.put('/order/:id/process', ProcessOrder)
+router.get('/order/:id', GetOrderById)
 
 export default router;
