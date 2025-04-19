@@ -49,6 +49,7 @@ export const GetFoodIn30Min = async (req: Request, res: Response) => {
             foodResult.push(...foods.filter(food => food.readyTime <= 30));
         })
         res.status(200).json(foodResult);
+        return;
     }
     
     res.status(404).json({ message: "No top restaurants found" });
@@ -78,6 +79,7 @@ export const SearchFoods = async (req: Request, res: Response) => {
         result.map(item => foodResult.push(...item.foods))
 
         res.status(200).json(result)
+        return;
     }
     res.status(400).json({ message: "Data Not Found" });
 }
